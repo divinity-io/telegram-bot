@@ -13,8 +13,11 @@ from telegram.ext import (
 from telegram.error import Forbidden, BadRequest, RetryAfter, TelegramError
 
 from config import ADMIN_ID
-from database import get_all_users
-
+from database import (
+    get_all_users,
+    save_broadcast_history,
+    get_broadcast_history,
+)
 logger = logging.getLogger(__name__)
 
 PENDING_BROADCAST = "admin_pending_broadcast"
@@ -42,12 +45,17 @@ def admin_keyboard() -> InlineKeyboardMarkup:
         ],
         [
             InlineKeyboardButton(
+                "🗂️ Broadcast history",
+                callback_data="admin:history",
+            ),
+        ],
+        [
+            InlineKeyboardButton(
                 "❌ Close",
                 callback_data="admin:close",
             ),
         ],
     ])
-
 
 async def admin_command(
     update: Update,
@@ -90,10 +98,53 @@ async def admin_callback(
         await query.edit_message_text("Admin panel closed.")
         return
 
+    if action == "admin:history":
+        try:
+            records = get_broadcast_history(limit=10)
+        except Exception:
+            logger.exception("Unable to load broadcast history")
+            await query.edit_message_text(
+                "⚠️ Could not load broadcast history. "
+                "Check your Supabase connection and table."
+            )
+            return
+
+        if not records:
+            await query.edit_message_text(
+                "🗂️ Broadcast History\n\n"
+                "No broadcasts have been recorded yet.",
+                reply_markup=admin_keyboard(),
+            )
+            return
+
+        lines = ["🗂️ Recent Broadcasts\n"]
+        for record in records:
+            created = str(record.get("created_at", "Unknown date"))
+            message = record.get("message", "")
+            preview = message.replace("\n", " ")[:70]
+            lines.append(
+                f"📅 {created}\n"
+                f"💬 {preview}\n"
+                f"👥 Recipients: {record.get('total_recipients', 0)}\n"
+                f"✅ Sent: {record.get('sent_count', 0)} | "
+                f"🚫 Blocked: {record.get('blocked_count', 0)} | "
+                f"⚠️ Failed: {record.get('failed_count', 0)}\n"
+                f"Status: {record.get('status', 'unknown')}\n"
+            )
+
+        text = "\n".join(lines)
+        await query.edit_message_text(
+            text[:4000],
+            reply_markup=admin_keyboard(),
+        )
+        return
+
+
     if action == "admin:stats":
         try:
-            users = get_all_users()
-            total_users = len(users or [])
+            users = get_all_users() or []
+            total_users = len(users)
+
             await query.edit_message_text(
                 "📊 DiviCore Dashboard\n\n"
                 f"👥 Registered users: {total_users}\n"
@@ -104,10 +155,12 @@ async def admin_callback(
         except Exception:
             logger.exception("Unable to load admin dashboard")
             await query.edit_message_text(
-                "⚠️ Could not load statistics. Check your Supabase "
-                "connection and users table."
+                "⚠️ Could not load statistics. "
+                "Check the Termux log for details."
             )
         return
+
+
 
     if action == "admin:broadcast":
         context.user_data[WAITING_FOR_BROADCAST] = True
@@ -212,6 +265,21 @@ async def admin_callback(
             f"⚠️ Other failures: {failed}",
             reply_markup=admin_keyboard(),
         )
+        try:
+            save_broadcast_history(
+                admin_telegram_id=update.effective_user.id,
+                message=message,
+                total_recipients=len(recipient_ids),
+                sent_count=sent,
+                blocked_count=blocked_or_unavailable,
+                failed_count=failed,
+                status="completed",
+            )
+        except Exception:
+            logger.exception("Failed to save broadcast history")
+            await query.message.reply_text(
+                "⚠️ Broadcast was sent, but its history could not be saved."
+            )
 
 
 async def handle_broadcast_text(
@@ -316,8 +384,7 @@ def register_admin_handlers(application) -> None:
     application.add_handler(
         CallbackQueryHandler(
             admin_callback,
-            pattern=r"^admin:(stats|broadcast|close|broadcast_confirm)$",
-        )
+pattern=r"^admin:(stats|broadcast|history|close|broadcast_confirm)$",        )
     )
 
     # Use a later handler group so normal text handlers can run first.

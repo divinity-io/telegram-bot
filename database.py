@@ -153,3 +153,47 @@ def get_all_users():
     )
 
     return response.data
+
+
+def save_broadcast_history(
+    admin_telegram_id,
+    message,
+    total_recipients,
+    sent_count,
+    blocked_count,
+    failed_count,
+    status="completed",
+):
+    data = {
+        "admin_telegram_id": admin_telegram_id,
+        "message": message,
+        "total_recipients": total_recipients,
+        "sent_count": sent_count,
+        "blocked_count": blocked_count,
+        "failed_count": failed_count,
+        "status": status,
+    }
+
+    try:
+        response = (
+            supabase
+            .table("broadcast_history")
+            .insert(data)
+            .execute()
+        )
+        return response.data
+    except Exception as exc:
+        print(f"BROADCAST HISTORY SAVE ERROR: {exc!r}")
+        raise
+
+def get_broadcast_history(limit=10):
+    response = (
+        supabase
+        .table("broadcast_history")
+        .select("*")
+        .order("created_at", desc=True)
+        .limit(limit)
+        .execute()
+    )
+
+    return response.data
