@@ -137,3 +137,19 @@ def clear_tool_history(
     )
 
     return response.data
+
+
+# =========================================================
+# ADMIN / BROADCAST
+# =========================================================
+
+def get_all_users():
+    response = (
+        supabase
+        .table("users")
+        .select("telegram_id")
+        .order("telegram_id")
+        .execute()
+    )
+
+    return response.data

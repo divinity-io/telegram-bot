@@ -11,6 +11,7 @@ from telegram.ext import (
 from handlers.start import start
 from handlers.commands import help_command, about_command
 from handlers.buttons import button_handler, show_menu
+from handlers.admin import register_admin_handlers
 
 from handlers.tools import (
     tools_command,
@@ -151,10 +152,14 @@ application.add_handler(
 # INLINE BUTTONS
 # =========================
 
-application.add_handler(
-    CallbackQueryHandler(button_handler)
-)
+register_admin_handlers(application)
 
+application.add_handler(
+    CallbackQueryHandler(
+        button_handler,
+        pattern=r"^(?!admin:).+"
+    )
+)
 
 # =========================
 # START BOT
