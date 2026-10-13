@@ -9,3 +9,5 @@ SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 ADMIN_ID = int(os.getenv("ADMIN_ID", "0"))
+
+DASHBOARD_URL = os.getenv("DASHBOARD_URL", "https://dcore-dashboard.onrender.com")

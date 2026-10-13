@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from telegram import BotCommand
+from telegram import BotCommand, MenuButtonWebApp, WebAppInfo
 from telegram.ext import (
     Application,
     CommandHandler,
@@ -70,16 +70,28 @@ async def set_commands(application):
 
     await application.bot.set_my_commands(commands)
 
+async def set_dashboard_menu(application):
+    from config import DASHBOARD_URL
+
+    await application.bot.set_chat_menu_button(
+        menu_button=MenuButtonWebApp(
+            text="Open DCORE",
+            web_app=WebAppInfo(url=DASHBOARD_URL),
+        )
+    )
+
+async def post_init(application):
+    await set_commands(application)
+    await set_dashboard_menu(application)
 
 # Create application
 application = (
     Application
     .builder()
     .token(TOKEN)
-    .post_init(set_commands)
+    .post_init(post_init)
     .build()
 )
-
 
 # =========================
 # GENERAL COMMANDS
