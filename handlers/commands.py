@@ -23,45 +23,45 @@ async def help_command(
 
     help_text = f"""{get_text('help', language)}
 
-🤖 DiviCore Commands
+🤖 DCORE Commands
 
 /start
-→ Register your account and start DiviCore.
+→ Register your account and start DCORE.
 
 /menu
-→ Open the DiviCore Control Center.
+→ Open the DCORE Control Center.
 
 /help
 → Show this help page.
 
 /about
-→ Learn about DiviCore, how it works, and its developer.
+→ Learn about DCORE, how it works, and its developer.
 
 ⚙️ Control Center
 
 👤 Profile
-→ View your DiviCore account information.
+→ View your DCORE account information.
 
 ⚙️ Settings
-→ Manage your DiviCore preferences.
+→ Manage your DCORE preferences.
 
 🔔 Notifications
 → Turn notifications ON or OFF.
 
 🌐 Language
-→ Change the language used by DiviCore.
+→ Change the language used by DCORE.
 
 ℹ️ About
 → Learn more about the project and its developer.
 
-🚀 DiviCore
+🚀 DCORE
 → Check the current bot status.
 
 💡 Tip
 
-You can use the buttons inside /menu to navigate DiviCore without typing commands.
+You can use the buttons inside /menu to navigate DCORE without typing commands.
 
-🚀 More features will be added as DiviCore continues to grow.
+🚀 More features will be added as DCORE continues to grow.
 """
 
     await update.message.reply_text(help_text)

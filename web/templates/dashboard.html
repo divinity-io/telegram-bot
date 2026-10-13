@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <title>DCORE — Personal Dashboard</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap');
+
+    :root {
+      --bg-dark: #1a1614;
+      --bg-cream: #f2e8d9;
+      --accent-orange: #f4532b;
+      --accent-blush: #f2cdc3;
+      --text-light: #f2e8d9;
+      --text-dark: #1a1614;
+      --border-light: rgba(242, 232, 217, 0.12);
+      --border-dark: rgba(26, 22, 20, 0.15);
+      --grid-line: rgba(242, 232, 217, 0.06);
+      --font-primary: 'Bricolage Grotesque', sans-serif;
+      --font-serif: 'DM Serif Display', serif;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --radius-pill: 9999px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--bg-dark);
+      background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 38px 38px;
+      color: var(--text-light);
+      font: 15px/1.6 var(--font-primary);
+    }
+
+    button { font: inherit; cursor: pointer; }
+    button:focus-visible { outline: 2px solid var(--accent-orange); outline-offset: 4px; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 245px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    aside {
+      padding: 30px 20px;
+      background: rgba(26, 22, 20, .96);
+      border-right: 1px solid var(--border-light);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+    }
+    .brand span { color: var(--accent-orange); }
+    .tagline {
+      color: rgba(242,232,217,.55);
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin: 8px 0 38px;
+    }
+
+    nav { display: grid; gap: 8px; }
+    nav button {
+      border: 1px solid transparent;
+      background: transparent;
+      color: rgba(242,232,217,.68);
+      text-align: left;
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      transition: .2s ease;
+    }
+    nav button:hover { color: var(--text-light); background: rgba(242,232,217,.05); }
+    nav button.active {
+      color: var(--text-light);
+      background: rgba(244,83,43,.12);
+      border-color: rgba(244,83,43,.3);
+    }
+
+    main { padding: 38px; max-width: 1250px; width: 100%; margin: 0 auto; }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .eyebrow {
+      color: var(--accent-orange);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: clamp(28px, 4vw, 46px);
+      letter-spacing: -1.8px;
+      line-height: 1.08;
+      margin: 9px 0;
+      font-weight: 800;
+    }
+    h2 { font-size: 18px; letter-spacing: -.4px; margin: 0 0 16px; }
+    p { color: rgba(242,232,217,.67); }
+    .muted { color: rgba(242,232,217,.55); font-size: 13px; }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--accent-blush);
+      color: var(--text-dark);
+      display: grid;
+      place-items: center;
+      font-size: 21px;
+      font-weight: 800;
+      border: 2px solid rgba(244,83,43,.45);
+    }
+
+    .welcome {
+      position: relative;
+      overflow: hidden;
+      margin: 32px 0 22px;
+      padding: clamp(24px, 4vw, 42px);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-xl);
+      background: var(--bg-cream);
+      color: var(--text-dark);
+    }
+    .welcome::after {
+      content: "D";
+      position: absolute;
+      right: 15px;
+      bottom: -90px;
+      font-family: var(--font-serif);
+      font-size: clamp(180px, 25vw, 310px);
+      line-height: 1;
+      color: rgba(244,83,43,.10);
+      pointer-events: none;
+    }
+    .welcome .eyebrow { color: var(--accent-orange); }
+    .welcome h1 {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-serif);
+      font-weight: 400;
+      letter-spacing: -1px;
+      font-size: clamp(35px, 5vw, 58px);
+      max-width: 650px;
+    }
+    .welcome p { color: rgba(26,22,20,.72); max-width: 440px; position: relative; z-index: 1; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      padding: 21px;
+      border-radius: var(--radius-lg);
+      background: rgba(26,22,20,.88);
+      border: 1px solid var(--border-light);
+      min-width: 0;
+    }
+    .stat {
+      font-size: clamp(25px, 3vw, 34px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin: 8px 0 3px;
+    }
+    .section { margin-top: 34px; }
+    .section > h2 { font-size: 21px; }
+
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .tool {
+      min-height: 132px;
+      padding: 18px;
+      text-align: left;
+      color: var(--text-light);
+      background: rgba(26,22,20,.9);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .tool:hover {
+      transform: translateY(-3px);
+      border-color: rgba(244,83,43,.7);
+      background: rgba(244,83,43,.07);
+    }
+    .tool .emoji { display: block; font-size: 25px; margin-bottom: 12px; }
+    .tool small { display: block; color: rgba(242,232,217,.52); margin-top: 4px; font-size: 12px; }
+
+    #activity { overflow-wrap: anywhere; }
+    .activity {
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .activity:last-child { border-bottom: 0; }
+    .activity strong { font-weight: 700; }
+    .status { color: rgba(242,232,217,.55); font-size: 12px; margin-top: 18px; }
+    .notice { color: var(--accent-blush); font-size: 13px; margin-top: 7px; }
+
+    @media (max-width: 850px) {
+      .layout { grid-template-columns: 200px minmax(0, 1fr); }
+      aside { padding: 24px 13px; }
+      main { padding: 25px 20px; }
+      .tools { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 620px) {
+      .layout { display: block; }
+      aside {
+        padding: 17px 14px 12px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border-light);
+      }
+      .brand { font-size: 25px; }
+      .tagline { margin: 5px 0 15px; }
+      nav {
+        display: flex;
+        gap: 7px;
+        overflow-x: auto;
+        padding-bottom: 3px;
+      }
+      nav button { flex: 0 0 auto; white-space: nowrap; padding: 9px 12px; font-size: 13px; }
+      main { padding: 22px 14px 35px; }
+      .welcome { margin-top: 23px; border-radius: var(--radius-lg); }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .card { padding: 16px; border-radius: var(--radius-md); }
+      .tools { gap: 10px; }
+      .tool { padding: 15px; border-radius: var(--radius-md); min-height: 125px; }
+    }
+
+    @media (max-width: 350px) {
+      .grid, .tools { grid-template-columns: 1fr; }
+      .top { align-items: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <aside>
+    <div class="brand">D<span>CORE</span></div>
+    <div class="tagline">YOUR DIGITAL WORKSPACE</div>
+    <nav aria-label="Dashboard navigation">
+      <button class="active" data-view="dashboard">🏠 Dashboard</button>
+      <button data-view="profile">👤 My Profile</button>
+      <button data-view="tools">🧰 Tools</button>
+      <button data-view="history">📜 History</button>
+      <button data-view="favorites">⭐ Favorites</button>
+      <button data-view="settings">⚙️ Settings</button>
+    </nav>
+  </aside>
+
+  <main>
+    <div class="top">
+      <div>
+        <div class="eyebrow">PERSONAL CONTROL CENTER</div>
+        <h1 id="greeting">Welcome to DCORE</h1>
+        <div class="muted" id="subtitle">Your tools. Your activity. Your workspace.</div>
+      </div>
+      <div class="avatar" id="avatar">👤</div>
+    </div>
+
+    <section class="welcome">
+      <div class="eyebrow">YOUR SPACE</div>
+      <h1 id="welcomeName">Hello there 👋</h1>
+      <p>Manage your tools and view your activity from one place.</p>
+    </section>
+
+    <section class="grid" aria-label="Account overview">
+      <div class="card"><div class="muted">Account</div><div class="stat" id="accountState">Loading</div><div class="muted">Registration status</div></div>
+      <div class="card"><div class="muted">Tool activity</div><div class="stat" id="historyCount">—</div><div class="muted">Recent records</div></div>
+      <div class="card"><div class="muted">Saved favorites</div><div class="stat" id="favoriteCount">—</div><div class="muted">Coming soon</div></div>
+    </section>
+
+    <section class="section" id="toolSection">
+      <h2>Quick tools</h2>
+      <div class="tools">
+        <button class="tool" data-tool="calc"><span class="emoji">🧮</span>Calculator<small>Quick calculations</small></button>
+        <button class="tool" data-tool="password"><span class="emoji">🔐</span>Password generator<small>Create a secure password</small></button>
+        <button class="tool" data-tool="json"><span class="emoji">{ }</span>JSON formatter<small>Format structured data</small></button>
+        <button class="tool" data-tool="qr"><span class="emoji">📱</span>QR generator<small>Create a QR code</small></button>
+        <button class="tool" data-tool="url"><span class="emoji">🔗</span>URL checker<small>Check a web address</small></button>
+        <button class="tool" data-tool="hash"><span class="emoji">#️⃣</span>Hash generator<small>Generate SHA-256</small></button>
+      </div>
+    </section>
+
+    <section class="section card">
+      <h2 id="sectionTitle">Recent activity</h2>
+      <div id="activity"><div class="activity muted">Connecting to your DCORE account…</div></div>
+      <div class="status" id="status" role="status">Waiting for secure account verification.</div>
+      <p class="notice" id="notice"></p>
+    </section>
+  </main>
+</div>
+
+<script>
+(() => {
+  const tg = window.Telegram && window.Telegram.WebApp;
+  if (tg) {
+    tg.ready();
+    tg.expand();
+  }
+
+  const $ = id => document.getElementById(id);
+  const user = tg && tg.initDataUnsafe && tg.initDataUnsafe.user;
+  const displayName = user && (user.first_name || user.username) || "DCORE User";
+  $("greeting").textContent = "Welcome, " + displayName;
+  $("welcomeName").textContent = "Hello, " + displayName + " 👋";
+  $("avatar").textContent = displayName.charAt(0).toUpperCase() || "👤";
+
+  // Telegram's client-side user object is for display only.
+  // It must never be trusted for authorization or database access.
+  const views = {
+    dashboard: ["Dashboard", "Your tools and recent activity."],
+    profile: ["My Profile", "Your registered account information."],
+    tools: ["Tools", "Your DCORE utilities."],
+    history: ["History", "Your recent tool activity."],
+    favorites: ["Favorites", "Saved tools will appear here when implemented."],
+    settings: ["Settings", "Manage your account preferences."]
+  };
+
+  document.querySelectorAll("[data-view]").forEach(button => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll("[data-view]").forEach(b => b.classList.remove("active"));
+      button.classList.add("active");
+      const view = views[button.dataset.view];
+      $("sectionTitle").textContent = view[0];
+      $("status").textContent = view[1];
+      if (button.dataset.view === "tools") $("toolSection").scrollIntoView({behavior:"smooth"});
+      else if (button.dataset.view === "history") $("activity").scrollIntoView({behavior:"smooth"});
+      else window.scrollTo({top:0, behavior:"smooth"});
+    });
+  });
+
+  document.querySelectorAll("[data-tool]").forEach(button => {
+    button.addEventListener("click", () => {
+      const command = {
+        calc:"calc", password:"password", json:"json",
+        qr:"qr", url:"url", hash:"hash"
+      }[button.dataset.tool];
+      if (tg) {
+        tg.sendData(JSON.stringify({action:"open_tool", tool:command}));
+        $("status").textContent = "Request sent to DCORE. If nothing happens, use the bot's command menu.";
+      } else {
+        $("status").textContent = "Open this dashboard through your DCORE Telegram bot to launch tools.";
+      }
+    });
+  });
+
+  async function loadAccount() {
+    if (!tg || !tg.initData) {
+      $("accountState").textContent = "Preview";
+      $("historyCount").textContent = "—";
+      $("activity").innerHTML = '<div class="activity muted">Open this page from the DCORE Telegram Mini App to load your account.</div>';
+      $("status").textContent = "Telegram verification is required to load private account data.";
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/me", {
+        method: "GET",
+        headers: { "Authorization": "tma " + tg.initData }
+      });
+      if (!response.ok) throw new Error("Account verification failed (" + response.status + ")");
+      const data = await response.json();
+      $("accountState").textContent = "Registered";
+      $("historyCount").textContent = String(data.history.length);
+      $("favoriteCount").textContent = "Soon";
+      $("welcomeName").textContent = "Hello, " + (data.profile.first_name || displayName) + " 👋";
+      $("activity").replaceChildren();
+
+      if (!data.history.length) {
+        const empty = document.createElement("div");
+        empty.className = "activity muted";
+        empty.textContent = "No tool activity yet. Try one of the tools above.";
+        $("activity").append(empty);
+      } else {
+        data.history.forEach(item => {
+          const row = document.createElement("div");
+          row.className = "activity";
+          const name = document.createElement("strong");
+          name.textContent = item.tool_name || "Tool";
+          const time = document.createElement("div");
+          time.className = "muted";
+          time.textContent = item.created_at || "";
+          row.append(name, time);
+          $("activity").append(row);
+        });
+      }
+      $("status").textContent = "Your account has been securely loaded.";
+    } catch (error) {
+      $("accountState").textContent = "Unavailable";
+      $("activity").replaceChildren();
+      $("status").textContent = "The secure backend is not connected yet.";
+      $("notice").textContent = error.message;
+    }
+  }
+  loadAccount();
+})();
+</script>
+</body>
+</html>

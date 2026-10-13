@@ -71,7 +71,7 @@ async def admin_command(
     context.user_data.pop(PENDING_BROADCAST, None)
 
     await update.effective_message.reply_text(
-        "🛡️ DiviCore Admin Panel\n\n"
+        "🛡️ DCORE Admin Panel\n\n"
         "Manage registered users and send announcements.",
         reply_markup=admin_keyboard(),
     )
@@ -146,7 +146,7 @@ async def admin_callback(
             total_users = len(users)
 
             await query.edit_message_text(
-                "📊 DiviCore Dashboard\n\n"
+                "📊 DCORE Dashboard\n\n"
                 f"👥 Registered users: {total_users}\n"
                 "📢 Broadcasts: available below\n\n"
                 "Choose an action:",
@@ -372,7 +372,7 @@ async def cancel_broadcast_callback(
 
 
 def register_admin_handlers(application) -> None:
-    """Register DiviCore admin commands and callbacks."""
+    """Register DCORE admin commands and callbacks."""
     application.add_handler(CommandHandler("admin", admin_command))
     application.add_handler(CommandHandler("cancelbroadcast", cancel_broadcast))
     application.add_handler(

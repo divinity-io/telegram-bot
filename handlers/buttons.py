@@ -441,7 +441,7 @@ async def button_handler(
     if query.data == "back_tools":
 
         await query.edit_message_text(
-            "🧰 DIVICORE DEVELOPER TOOLKIT\n\n"
+            "🧰 DCORE DEVELOPER TOOLKIT\n\n"
             "A collection of useful developer utilities.\n\n"
             "Choose a tool below:",
             reply_markup=tools_keyboard()
@@ -855,9 +855,9 @@ async def button_handler(
 
         await query.edit_message_text(
             f"{get_text('help', language)}\n\n"
-            "/start — Start DiviCore\n"
+            "/start — Start DCORE\n"
             "/help — Show help\n"
-            "/about — About DiviCore\n"
+            "/about — About DCORE\n"
             "/menu — Open the control center\n"
             "/tools — Open Developer Toolkit",
             reply_markup=InlineKeyboardMarkup([
@@ -914,7 +914,7 @@ async def button_handler(
 
 
     # =====================================================
-    # DIVICORE STATUS
+    # DCORE STATUS
     # =====================================================
 
     if query.data == "divicore":

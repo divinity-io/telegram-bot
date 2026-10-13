@@ -6,24 +6,24 @@ LANGUAGES = {
         # START / REGISTRATION
         # =========================
 
-        "welcome": "👋 Welcome to DiviCore, {name}!",
+        "welcome": "👋 Welcome to DCORE, {name}!",
         "registered": "🎉 Your account has been registered successfully.",
         "welcome_back": "👋 Welcome back, {name}!",
-        "already_registered": "✅ Your DiviCore account is already registered.",
+        "already_registered": "✅ Your DCORE account is already registered.",
 
         # =========================
         # MAIN MENU
         # =========================
 
-        "menu": "🤖 DiviCore Control Center",
+        "menu": "🤖 DCORE Control Center",
         "choose_option": "Welcome! Choose an option below:",
 
         # =========================
         # PROFILE / SETTINGS
         # =========================
 
-        "profile": "👤 Your DiviCore Profile",
-        "settings": "⚙️ DiviCore Settings",
+        "profile": "👤 Your DCORE Profile",
+        "settings": "⚙️ DCORE Settings",
         "language": "🌐 Language Settings",
         "select_language": "Select your language:",
 
@@ -35,7 +35,7 @@ LANGUAGES = {
         "settings_button": "⚙️ Settings",
         "help_button": "❓ Help",
         "about_button": "ℹ️ About",
-        "divicore_button": "🚀 DiviCore",
+        "divicore_button": "🚀 DCORE",
         "back_button": "🔙 Back",
 
         # =========================
@@ -62,24 +62,24 @@ LANGUAGES = {
         "help": "❓ Help",
 
         # =========================
-        # ABOUT DIVICORE
+        # ABOUT DCORE
         # =========================
 
-        "about": """ℹ️ ABOUT DIVICORE
+        "about": """ℹ️ ABOUT DCORE
 
-🚀 What is DiviCore?
+🚀 What is DCORE?
 
-DiviCore is a Python-powered Telegram assistant built to provide useful digital tools and services directly inside Telegram.
+DCORE is a Python-powered Telegram assistant built to provide useful digital tools and services directly inside Telegram.
 
 The goal is to create a practical, simple, and expandable digital assistant that can grow with new features over time.
 
-⚙️ How DiviCore Works
+⚙️ How DCORE Works
 
-DiviCore connects Telegram with a Python backend and a Supabase database.
+DCORE connects Telegram with a Python backend and a Supabase database.
 
 Here is the basic flow:
 
-1️⃣ You interact with DiviCore through Telegram.
+1️⃣ You interact with DCORE through Telegram.
 
 2️⃣ Telegram sends your command or button action to the Python bot.
 
@@ -87,11 +87,11 @@ Here is the basic flow:
 
 4️⃣ Supabase stores important account preferences such as your Telegram profile, language, and notification settings.
 
-5️⃣ DiviCore reads your saved preferences and uses them to personalize your experience.
+5️⃣ DCORE reads your saved preferences and uses them to personalize your experience.
 
 6️⃣ Inline buttons make it easier to navigate the bot without typing everything manually.
 
-🧩 Technology Behind DiviCore
+🧩 Technology Behind DCORE
 
 🐍 Python
 🤖 Telegram Bot API
@@ -104,11 +104,11 @@ Here is the basic flow:
 
 Security and responsible development are important parts of the project.
 
-DiviCore is being developed with the idea that useful technology should not only work, but should also continue improving in reliability, privacy, and security.
+DCORE is being developed with the idea that useful technology should not only work, but should also continue improving in reliability, privacy, and security.
 
 🌍 Vision
 
-The vision behind DiviCore is to build practical digital tools that solve real problems, remain simple to use, and can grow into something much bigger.
+The vision behind DCORE is to build practical digital tools that solve real problems, remain simple to use, and can grow into something much bigger.
 
 👨‍💻 The Developer
 
@@ -165,15 +165,15 @@ github.com/divinity-io
 
 Divinity is open to building projects, exploring ideas, learning new technologies, and collaborating on useful digital solutions.
 
-🚀 DiviCore is continuously evolving.
+🚀 DCORE is continuously evolving.
 
 More features, tools, and improvements can be added as development continues.""",
 
         # =========================
-        # DIVICORE STATUS
+        # DCORE STATUS
         # =========================
 
-        "online": "🚀 DiviCore is online!",
+        "online": "🚀 DCORE is online!",
     },
 
 
@@ -184,18 +184,18 @@ More features, tools, and improvements can be added as development continues."""
     "Igbo": {
 
         # START
-        "welcome": "👋 Nnọọ na DiviCore, {name}!",
+        "welcome": "👋 Nnọọ na DCORE, {name}!",
         "registered": "🎉 Edebanyela akaụntụ gị nke ọma.",
         "welcome_back": "👋 Nnọọ ọzọ, {name}!",
-        "already_registered": "✅ Edebanyela akaụntụ DiviCore gị mbụ.",
+        "already_registered": "✅ Edebanyela akaụntụ DCORE gị mbụ.",
 
         # MENU
-        "menu": "🤖 Ebe Nchịkwa DiviCore",
+        "menu": "🤖 Ebe Nchịkwa DCORE",
         "choose_option": "Nnọọ! Họrọ nhọrọ dị n'okpuru:",
 
         # PROFILE / SETTINGS
-        "profile": "👤 Profaịlụ DiviCore Gị",
-        "settings": "⚙️ Ntọala DiviCore",
+        "profile": "👤 Profaịlụ DCORE Gị",
+        "settings": "⚙️ Ntọala DCORE",
         "language": "🌐 Ntọala Asụsụ",
         "select_language": "Họrọ asụsụ gị:",
 
@@ -204,7 +204,7 @@ More features, tools, and improvements can be added as development continues."""
         "settings_button": "⚙️ Ntọala",
         "help_button": "❓ Enyemaka",
         "about_button": "ℹ️ Banyere",
-        "divicore_button": "🚀 DiviCore",
+        "divicore_button": "🚀 DCORE",
         "back_button": "🔙 Azụ",
 
         # NOTIFICATIONS
@@ -222,21 +222,21 @@ More features, tools, and improvements can be added as development continues."""
         "help": "❓ Enyemaka",
 
         # ABOUT
-        "about": """ℹ️ BANYERE DIVICORE
+        "about": """ℹ️ BANYERE DCORE
 
-🚀 Kedu ihe bụ DiviCore?
+🚀 Kedu ihe bụ DCORE?
 
-DiviCore bụ Telegram assistant nke e ji Python wuo iji nye ngwaọrụ dijitalụ bara uru na ọrụ dị iche iche n'ime Telegram.
+DCORE bụ Telegram assistant nke e ji Python wuo iji nye ngwaọrụ dijitalụ bara uru na ọrụ dị iche iche n'ime Telegram.
 
 Ebumnuche ya bụ imepụta assistant dị mfe iji, bara uru, ma nwee ike ịgbasa site n'ịgbakwunye atụmatụ ọhụrụ n'ọdịnihu.
 
-⚙️ Otu DiviCore si arụ ọrụ
+⚙️ Otu DCORE si arụ ọrụ
 
-DiviCore na-ejikọta Telegram, Python backend na Supabase database.
+DCORE na-ejikọta Telegram, Python backend na Supabase database.
 
 Usoro ya bụ:
 
-1️⃣ Ị na-eji Telegram emekọrịta ihe na DiviCore.
+1️⃣ Ị na-eji Telegram emekọrịta ihe na DCORE.
 
 2️⃣ Telegram na-ezigara Python bot command ma ọ bụ button action gị.
 
@@ -244,11 +244,11 @@ Usoro ya bụ:
 
 4️⃣ Supabase na-echekwa ụfọdụ ozi na mmasị gị dịka Telegram profile, asụsụ na notification settings.
 
-5️⃣ DiviCore na-agụ mmasị ndị ahụ iji mee ka ahụmịhe gị bụrụ nke ahaziri maka gị.
+5️⃣ DCORE na-agụ mmasị ndị ahụ iji mee ka ahụmịhe gị bụrụ nke ahaziri maka gị.
 
 6️⃣ Inline buttons na-eme ka ị nwee ike ịnyagharịa bot ahụ n'ụzọ dị mfe.
 
-🧩 Teknụzụ e ji wuo DiviCore
+🧩 Teknụzụ e ji wuo DCORE
 
 🐍 Python
 🤖 Telegram Bot API
@@ -265,7 +265,7 @@ Ebumnuche bụ ime ka teknụzụ ghara ịbụ naanị ihe na-arụ ọrụ, ka
 
 🌍 Ọhụụ
 
-Ebumnuche DiviCore bụ ịrụpụta ngwaọrụ dijitalụ bara uru nke na-edozi nsogbu n'ezie, dị mfe iji, ma nwee ike ito.
+Ebumnuche DCORE bụ ịrụpụta ngwaọrụ dijitalụ bara uru nke na-edozi nsogbu n'ezie, dị mfe iji, ma nwee ike ito.
 
 👨‍💻 Onye nrụpụta
 
@@ -322,12 +322,12 @@ github.com/divinity-io
 
 Divinity na-emeghe ụzọ maka ịrụpụta projects, ịmụ teknụzụ ọhụrụ, ịnwale echiche ọhụrụ, na imekọrịta ọrụ n'ihe gbasara digital solutions.
 
-🚀 DiviCore ka na-aga n'ihu na mmepe.
+🚀 DCORE ka na-aga n'ihu na mmepe.
 
 A ga-enwe ike ịgbakwunye atụmatụ, ngwaọrụ na ndozi ọhụrụ n'ọdịnihu.""",
 
         # STATUS
-        "online": "🚀 DiviCore dị n'ịntanetị!",
+        "online": "🚀 DCORE dị n'ịntanetị!",
     },
 
 
@@ -338,18 +338,18 @@ A ga-enwe ike ịgbakwunye atụmatụ, ngwaọrụ na ndozi ọhụrụ n'ọd�
     "Hausa": {
 
         # START
-        "welcome": "👋 Barka da zuwa DiviCore, {name}!",
+        "welcome": "👋 Barka da zuwa DCORE, {name}!",
         "registered": "🎉 An yi rajistar asusunka cikin nasara.",
         "welcome_back": "👋 Barka da dawowa, {name}!",
-        "already_registered": "✅ An riga an yi rajistar asusunka na DiviCore.",
+        "already_registered": "✅ An riga an yi rajistar asusunka na DCORE.",
 
         # MENU
-        "menu": "🤖 Cibiyar Sarrafa DiviCore",
+        "menu": "🤖 Cibiyar Sarrafa DCORE",
         "choose_option": "Barka da zuwa! Zaɓi wani zaɓi a ƙasa:",
 
         # PROFILE / SETTINGS
-        "profile": "👤 Bayanan DiviCore ɗinka",
-        "settings": "⚙️ Saitunan DiviCore",
+        "profile": "👤 Bayanan DCORE ɗinka",
+        "settings": "⚙️ Saitunan DCORE",
         "language": "🌐 Saitunan Harshe",
         "select_language": "Zaɓi harshenka:",
 
@@ -358,7 +358,7 @@ A ga-enwe ike ịgbakwunye atụmatụ, ngwaọrụ na ndozi ọhụrụ n'ọd�
         "settings_button": "⚙️ Saituna",
         "help_button": "❓ Taimako",
         "about_button": "ℹ️ Game da",
-        "divicore_button": "🚀 DiviCore",
+        "divicore_button": "🚀 DCORE",
         "back_button": "🔙 Koma",
 
         # NOTIFICATIONS
@@ -376,21 +376,21 @@ A ga-enwe ike ịgbakwunye atụmatụ, ngwaọrụ na ndozi ọhụrụ n'ọd�
         "help": "❓ Taimako",
 
         # ABOUT
-        "about": """ℹ️ GAME DA DIVICORE
+        "about": """ℹ️ GAME DA DCORE
 
-🚀 Menene DiviCore?
+🚀 Menene DCORE?
 
-DiviCore mataimaki ne na Telegram wanda aka gina da Python domin samar da kayan aikin dijital masu amfani kai tsaye cikin Telegram.
+DCORE mataimaki ne na Telegram wanda aka gina da Python domin samar da kayan aikin dijital masu amfani kai tsaye cikin Telegram.
 
 Manufarsa ita ce samar da mataimaki mai sauƙin amfani, mai amfani, kuma wanda za a iya ƙara masa sababbin abubuwa a nan gaba.
 
-⚙️ Yadda DiviCore yake aiki
+⚙️ Yadda DCORE yake aiki
 
-DiviCore yana haɗa Telegram da Python backend da kuma Supabase database.
+DCORE yana haɗa Telegram da Python backend da kuma Supabase database.
 
 Tsarin aikin:
 
-1️⃣ Kana hulɗa da DiviCore ta Telegram.
+1️⃣ Kana hulɗa da DCORE ta Telegram.
 
 2️⃣ Telegram yana aika command ko button action zuwa Python bot.
 
@@ -398,7 +398,7 @@ Tsarin aikin:
 
 4️⃣ Supabase yana adana wasu bayanai da zaɓuɓɓukan mai amfani kamar Telegram profile, harshe da notification settings.
 
-5️⃣ DiviCore yana karanta waɗannan zaɓuɓɓuka domin tsara maka ƙwarewa ta musamman.
+5️⃣ DCORE yana karanta waɗannan zaɓuɓɓuka domin tsara maka ƙwarewa ta musamman.
 
 6️⃣ Inline buttons suna sauƙaƙa amfani da bot ba tare da rubuta komai ba.
 
@@ -419,9 +419,9 @@ Manufar ita ce gina fasahar da ba kawai take aiki ba, amma kuma tana ci gaba da 
 
 🌍 Manufa
 
-Manufar DiviCore ita ce gina kayan aikin dijital masu amfani waɗanda suke magance matsaloli na gaske, masu sauƙin amfani, kuma za su iya haɓaka.
+Manufar DCORE ita ce gina kayan aikin dijital masu amfani waɗanda suke magance matsaloli na gaske, masu sauƙin amfani, kuma za su iya haɓaka.
 
-👨‍💻 Mai Gina DiviCore
+👨‍💻 Mai Gina DCORE
 
 Divinity
 
@@ -476,12 +476,12 @@ github.com/divinity-io
 
 Divinity yana sha'awar gina projects, koyon sabbin fasahohi, gwada sababbin ra'ayoyi, da yin aiki tare wajen samar da digital solutions masu amfani.
 
-🚀 DiviCore yana ci gaba da haɓaka.
+🚀 DCORE yana ci gaba da haɓaka.
 
 Za a iya ƙara sababbin features, tools da improvements yayin da ci gaba yake gudana.""",
 
         # STATUS
-        "online": "🚀 DiviCore yana kan layi!",
+        "online": "🚀 DCORE yana kan layi!",
     },
 
 
@@ -492,18 +492,18 @@ Za a iya ƙara sababbin features, tools da improvements yayin da ci gaba yake gu
     "Yoruba": {
 
         # START
-        "welcome": "👋 Kaabo si DiviCore, {name}!",
+        "welcome": "👋 Kaabo si DCORE, {name}!",
         "registered": "🎉 A ti forukọsilẹ akọọlẹ rẹ ni aṣeyọri.",
         "welcome_back": "👋 Kaabo pada, {name}!",
-        "already_registered": "✅ A ti forukọsilẹ akọọlẹ DiviCore rẹ tẹlẹ.",
+        "already_registered": "✅ A ti forukọsilẹ akọọlẹ DCORE rẹ tẹlẹ.",
 
         # MENU
-        "menu": "🤖 Ile-iṣẹ Iṣakoso DiviCore",
+        "menu": "🤖 Ile-iṣẹ Iṣakoso DCORE",
         "choose_option": "Kaabo! Yan aṣayan kan ni isalẹ:",
 
         # PROFILE / SETTINGS
-        "profile": "👤 Profaili DiviCore Rẹ",
-        "settings": "⚙️ Eto DiviCore",
+        "profile": "👤 Profaili DCORE Rẹ",
+        "settings": "⚙️ Eto DCORE",
         "language": "🌐 Eto Ede",
         "select_language": "Yan ede rẹ:",
 
@@ -512,7 +512,7 @@ Za a iya ƙara sababbin features, tools da improvements yayin da ci gaba yake gu
         "settings_button": "⚙️ Eto",
         "help_button": "❓ Iranlọwọ",
         "about_button": "ℹ️ Nipa",
-        "divicore_button": "🚀 DiviCore",
+        "divicore_button": "🚀 DCORE",
         "back_button": "🔙 Pada",
 
         # NOTIFICATIONS
@@ -530,21 +530,21 @@ Za a iya ƙara sababbin features, tools da improvements yayin da ci gaba yake gu
         "help": "❓ Iranlọwọ",
 
         # ABOUT
-        "about": """ℹ️ NIPA DIVICORE
+        "about": """ℹ️ NIPA DCORE
 
-🚀 Kí ni DiviCore?
+🚀 Kí ni DCORE?
 
-DiviCore jẹ́ Telegram assistant tí a fi Python kọ́ láti pèsè àwọn irinṣẹ́ dijítà àti iṣẹ́ tó wúlò taara nínú Telegram.
+DCORE jẹ́ Telegram assistant tí a fi Python kọ́ láti pèsè àwọn irinṣẹ́ dijítà àti iṣẹ́ tó wúlò taara nínú Telegram.
 
 Ìdí rẹ̀ ni láti kọ́ assistant tí ó rọrùn láti lò, tó wúlò, tí ó sì lè máa dàgbà pẹ̀lú àwọn features tuntun.
 
-⚙️ Bí DiviCore ṣe ń ṣiṣẹ́
+⚙️ Bí DCORE ṣe ń ṣiṣẹ́
 
-DiviCore ń so Telegram pọ̀ mọ́ Python backend àti Supabase database.
+DCORE ń so Telegram pọ̀ mọ́ Python backend àti Supabase database.
 
 Bí iṣẹ́ náà ṣe ń lọ:
 
-1️⃣ O ń bá DiviCore ṣiṣẹ́ nipasẹ Telegram.
+1️⃣ O ń bá DCORE ṣiṣẹ́ nipasẹ Telegram.
 
 2️⃣ Telegram ń fi command tàbí button action rẹ ranṣẹ́ sí Python bot.
 
@@ -552,11 +552,11 @@ Bí iṣẹ́ náà ṣe ń lọ:
 
 4️⃣ Supabase ń ṣàkóso àwọn data àti preferences bí Telegram profile, ede àti notification settings.
 
-5️⃣ DiviCore ń ka àwọn preferences wọ̀nyí láti ṣe experience tó bá ọ mu.
+5️⃣ DCORE ń ka àwọn preferences wọ̀nyí láti ṣe experience tó bá ọ mu.
 
 6️⃣ Inline buttons ń jẹ́ kí lílo bot náà rọrùn láì nílò láti tẹ̀ gbogbo command.
 
-🧩 Àwọn technology tí DiviCore ń lò
+🧩 Àwọn technology tí DCORE ń lò
 
 🐍 Python
 🤖 Telegram Bot API
@@ -573,7 +573,7 @@ Security àti responsible development jẹ́ apá pàtàkì nínú iṣẹ́ yì
 
 🌍 Ìran
 
-Ìran DiviCore ni láti kọ́ àwọn digital tools tó wúlò, tó ń yanju àwọn iṣoro gidi, tó rọrùn láti lò, tí ó sì lè dàgbà sí ohun ńlá.
+Ìran DCORE ni láti kọ́ àwọn digital tools tó wúlò, tó ń yanju àwọn iṣoro gidi, tó rọrùn láti lò, tí ó sì lè dàgbà sí ohun ńlá.
 
 👨‍💻 Developer
 
@@ -630,12 +630,12 @@ github.com/divinity-io
 
 Divinity ṣí sí building projects, kíkọ́ àwọn technologies tuntun, ṣíṣe àwọn ideas tuntun, àti collaboration lórí àwọn digital solutions tó wúlò.
 
-🚀 DiviCore ṣi ń dagbasoke.
+🚀 DCORE ṣi ń dagbasoke.
 
 A lè máa fi àwọn features, tools àti improvements tuntun kún un bí development ṣe ń tẹ̀síwájú.""",
 
         # STATUS
-        "online": "🚀 DiviCore wa lori ayelujara!",
+        "online": "🚀 DCORE wa lori ayelujara!",
     }
 }
 

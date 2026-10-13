@@ -139,7 +139,7 @@ async def tools_command(
     context: ContextTypes.DEFAULT_TYPE
 ):
     await update.message.reply_text(
-        "🧰 DIVICORE DEVELOPER TOOLKIT\n\n"
+        "🧰 DCORE DEVELOPER TOOLKIT\n\n"
         "A collection of useful developer utilities.\n\n"
         "Choose a tool below:",
         reply_markup=tools_keyboard()
@@ -542,7 +542,7 @@ async def url_checker(
             url,
             method="HEAD",
             headers={
-                "User-Agent": "DiviCore/1.0"
+                "User-Agent": "DCORE/1.0"
             }
         )
 
@@ -622,7 +622,7 @@ async def ip_information(
         request = urllib.request.Request(
             api_url,
             headers={
-                "User-Agent": "DiviCore/1.0"
+                "User-Agent": "DCORE/1.0"
             }
         )
 

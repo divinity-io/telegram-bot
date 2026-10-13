@@ -6,9 +6,12 @@ from telegram.ext import (
     Application,
     CommandHandler,
     CallbackQueryHandler,
+    MessageHandler,
+    filters,
 )
 
 from handlers.start import start
+from handlers.dashboard import dashboard_handler
 from handlers.commands import help_command, about_command
 from handlers.buttons import button_handler, show_menu
 from handlers.admin import register_admin_handlers
@@ -43,7 +46,7 @@ if not TOKEN:
 # Telegram native command menu
 async def set_commands(application):
     commands = [
-        BotCommand("start", "Start DiviCore"),
+        BotCommand("start", "Start DCORE"),
         BotCommand("menu", "Open control center"),
         BotCommand("tools", "Developer toolkit"),
 
@@ -62,7 +65,7 @@ async def set_commands(application):
         BotCommand("hash", "Generate SHA-256 hash"),
 
         BotCommand("help", "Show help"),
-        BotCommand("about", "About DiviCore"),
+        BotCommand("about", "About DCORE"),
     ]
 
     await application.bot.set_my_commands(commands)
@@ -149,6 +152,17 @@ application.add_handler(
 
 
 # =========================
+# PERSISTENT DASHBOARD KEYBOARD
+# =========================
+
+application.add_handler(
+    MessageHandler(
+        filters.Regex(r"^(🏠 Dashboard|👤 My Profile|🧰 Tools|📜 History|⭐ Favorites|⚙️ Settings)$"),
+        dashboard_handler,
+    )
+)
+
+# =========================
 # INLINE BUTTONS
 # =========================
 
@@ -165,6 +179,6 @@ application.add_handler(
 # START BOT
 # =========================
 
-print("🚀 DiviCore is running...")
+print("🚀 DCORE is running...")
 
 application.run_polling()
