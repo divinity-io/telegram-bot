@@ -260,170 +260,345 @@
         transition: none !important;
       }
     }
-  </style>
+
+/* DCORE dashboard redesign */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg-dark); color: var(--text-light); font-family: var(--font-primary); }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+.hidden { display: none !important; }
+
+.app-shell { min-height: 100vh; display: flex; }
+.sidebar { width: 245px; flex-shrink: 0; padding: 28px 18px; border-right: 1px solid var(--border-light); display: flex; flex-direction: column; gap: 28px; }
+.brand { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 800; letter-spacing: -.8px; }
+.brand-mark { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; color: var(--text-dark); background: var(--accent-orange); font-weight: 900; }
+.nav-label { color: #a69c91; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; margin: 8px 12px; }
+.sidebar nav { display: grid; gap: 7px; }
+.nav-link { display: flex; align-items: center; gap: 12px; width: 100%; border: 1px solid transparent; border-radius: 12px; padding: 12px 14px; background: transparent; color: #bcb2a8; text-align: left; }
+.nav-link:hover, .nav-link.active { background: rgba(244,83,43,.12); color: var(--text-light); border-color: rgba(244,83,43,.2); }
+.sidebar-bottom { margin-top: auto; border: 1px solid var(--border-light); border-radius: 16px; padding: 16px; color: #c8bdb1; font-size: 13px; line-height: 1.6; }
+.sidebar-bottom strong { display: block; color: var(--text-light); margin-bottom: 5px; }
+
+.main-panel { min-width: 0; flex: 1; }
+.topbar { min-height: 78px; padding: 18px 4.5%; display: flex; align-items: center; justify-content: space-between; gap: 18px; border-bottom: 1px solid var(--border-light); }
+.topbar small, .muted { color: #a69c91; }
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.status-pill, .profile-badge { display: inline-flex; align-items: center; gap: 7px; padding: 7px 11px; border: 1px solid var(--border-light); border-radius: 999px; color: #c8bdb1; font-size: 12px; }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: #7dd6a3; }
+.top-avatar, .profile-avatar { display: grid; place-items: center; background: var(--accent-blush); color: var(--text-dark); font-weight: 800; border-radius: 50%; }
+.top-avatar { width: 38px; height: 38px; }
+.page-content { width: min(1180px, 100%); margin: 0 auto; padding: 34px 4.5% 100px; }
+.view-panel { display: none; }
+.view-panel.active-view { display: block; }
+.page-heading { margin: 0 0 8px; font-size: clamp(26px, 4vw, 39px); letter-spacing: -1.5px; }
+.page-subtitle { margin: 0 0 28px; color: #a69c91; line-height: 1.65; }
+.eyebrow { color: var(--accent-orange); font-size: 11px; text-transform: uppercase; letter-spacing: 1.8px; font-weight: 800; }
+
+.welcome-row { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; margin-bottom: 22px; }
+.hero-card { position: relative; overflow: hidden; min-height: 235px; padding: 30px; border: 1px solid var(--border-light); border-radius: 24px; background: linear-gradient(130deg, #30221d, #211a17 75%); }
+.hero-copy { position: relative; z-index: 1; max-width: 440px; }
+.hero-card h1 { margin: 12px 0; font-size: clamp(30px, 4vw, 46px); letter-spacing: -1.8px; line-height: 1.04; }
+.hero-card p { color: #c8bdb1; line-height: 1.7; }
+.hero-art { position: absolute; right: -18px; bottom: -38px; width: 185px; height: 185px; border-radius: 50%; border: 1px solid rgba(244,83,43,.35); background: radial-gradient(circle at 35% 30%, #f78661, #f4532b 35%, #71301f 68%, transparent 69%); opacity: .8; }
+.hero-art:after { content: "D"; position: absolute; inset: 0; display: grid; place-items: center; color: #1a1614; font-size: 100px; font-weight: 900; }
+.hero-side { padding: 24px; border: 1px solid var(--border-light); border-radius: 24px; background: #211c19; display: flex; flex-direction: column; justify-content: space-between; }
+.hero-side strong { font-size: 21px; }
+.hero-side p { color: #a69c91; line-height: 1.6; }
+.primary-btn, .secondary-btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; border-radius: 12px; padding: 12px 16px; font-weight: 700; border: 1px solid transparent; }
+.primary-btn { background: var(--accent-orange); color: #1a1614; }
+.secondary-btn { background: transparent; color: var(--text-light); border-color: var(--border-light); }
+.primary-btn:hover { filter: brightness(1.08); }
+.stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 20px 0 28px; }
+.stat-card { padding: 21px; border: 1px solid var(--border-light); border-radius: 18px; background: #211c19; }
+.stat-label { color: #a69c91; font-size: 13px; }
+.stat-value { display: block; margin-top: 12px; font-size: 29px; font-weight: 800; letter-spacing: -1px; }
+.stat-note { margin-top: 6px; color: #8f857b; font-size: 12px; }
+
+.section-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 15px; }
+.section-row h2 { margin: 0; font-size: 19px; letter-spacing: -.4px; }
+.content-card { min-width: 0; border: 1px solid var(--border-light); border-radius: 20px; background: #211c19; padding: 22px; margin-bottom: 20px; }
+.dashboard-columns { display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; }
+.activity-list { display: grid; gap: 10px; }
+.activity { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--border-light); }
+.activity:last-child { border-bottom: 0; }
+.activity-icon { flex-shrink: 0; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; background: rgba(244,83,43,.12); color: var(--accent-orange); }
+.activity-info { min-width: 0; flex: 1; }
+.activity-info strong { display: block; overflow-wrap: anywhere; font-size: 14px; }
+.activity-info small { display: block; margin-top: 4px; color: #a69c91; }
+.empty-state { text-align: center; padding: 28px 14px; color: #a69c91; line-height: 1.7; }
+.tool-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.tool-card { min-width: 0; text-align: left; padding: 18px; border: 1px solid var(--border-light); border-radius: 16px; background: #29211d; color: var(--text-light); }
+.tool-card:hover { border-color: var(--accent-orange); transform: translateY(-2px); }
+.tool-card strong { display: block; margin: 12px 0 6px; }
+.tool-card small { color: #a69c91; line-height: 1.5; }
+.tool-icon { font-size: 23px; color: var(--accent-orange); }
+
+.profile-card { display: grid; grid-template-columns: 180px minmax(0,1fr); gap: 26px; }
+.profile-banner { border-radius: 16px; background: linear-gradient(145deg, #f4532b, #9d3d25); min-height: 170px; display: grid; place-items: center; }
+.profile-avatar { width: 90px; height: 90px; font-size: 30px; border: 4px solid rgba(255,255,255,.35); }
+.profile-main h2 { margin: 0 0 6px; font-size: 25px; }
+.profile-main > p { margin-top: 0; color: #a69c91; }
+.profile-fields { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: 22px; }
+.field { min-width: 0; padding: 14px; border: 1px solid var(--border-light); border-radius: 12px; }
+.field small { display: block; color: #a69c91; margin-bottom: 7px; }
+.field strong { display: block; overflow-wrap: anywhere; font-size: 14px; }
+.history-toolbar { display: flex; gap: 10px; flex-wrap: wrap; }
+.settings-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 17px 0; border-bottom: 1px solid var(--border-light); }
+.settings-row:last-child { border-bottom: 0; }
+.settings-row strong { display: block; margin-bottom: 5px; }
+.settings-row p { margin: 0; color: #a69c91; font-size: 13px; line-height: 1.5; }
+.readonly-value { color: #d9cfc4; font-size: 13px; text-align: right; }
+.footer { border-top: 1px solid var(--border-light); padding: 22px 4.5%; color: #91877d; font-size: 12px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.footer a { color: var(--accent-orange); }
+.mobile-nav { display: none; }
+
+@media (max-width: 1000px) {
+ .sidebar { width: 205px; }
+ .welcome-row { grid-template-columns: 1fr; }
+ .hero-side { gap: 12px; }
+ .dashboard-columns { grid-template-columns: 1fr; }
+ .tool-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 680px) {
+ .app-shell { display: block; }
+ .sidebar { display: none; }
+ .topbar { min-height: 66px; padding: 12px 18px; }
+ .topbar small { display: none; }
+ .page-content { padding: 24px 16px 105px; }
+ .hero-card { min-height: 225px; padding: 23px; }
+ .hero-art { width: 130px; height: 130px; right: -18px; bottom: -25px; }
+ .hero-art:after { font-size: 70px; }
+ .stats-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; }
+ .stat-card { padding: 13px 10px; border-radius: 14px; }
+ .stat-value { font-size: 23px; }
+ .stat-label, .stat-note { font-size: 11px; }
+ .content-card { padding: 17px; border-radius: 16px; }
+ .tool-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+ .tool-card { padding: 14px; }
+ .profile-card { grid-template-columns: 1fr; gap: 18px; }
+ .profile-banner { min-height: 125px; }
+ .profile-fields { grid-template-columns: 1fr 1fr; }
+ .mobile-nav { position: fixed; z-index: 20; left: 10px; right: 10px; bottom: 10px; display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 3px; padding: 8px 5px; border: 1px solid rgba(242,232,217,.15); border-radius: 18px; background: rgba(26,22,20,.96); backdrop-filter: blur(14px); }
+ .mobile-nav .nav-link { display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 8px 2px; font-size: 10px; text-align: center; }
+ .mobile-nav .nav-link span { font-size: 17px; }
+ .footer { padding: 20px 16px 95px; }
+}
+@media (max-width: 370px) {
+ .stats-grid { grid-template-columns: 1fr; }
+ .profile-fields { grid-template-columns: 1fr; }
+ .hero-card h1 { font-size: 29px; }
+}
+
+</style>
 </head>
+
 <body>
-<div class="layout">
-  <aside>
-    <div class="brand">D<span>CORE</span></div>
-    <div class="tagline">YOUR DIGITAL WORKSPACE</div>
-    <nav aria-label="Dashboard navigation">
-      <button class="active" data-view="dashboard">🏠 Dashboard</button>
-      <button data-view="profile">👤 My Profile</button>
-      <button data-view="tools">🧰 Tools</button>
-      <button data-view="history">📜 History</button>
-      <button data-view="favorites">⭐ Favorites</button>
-      <button data-view="settings">⚙️ Settings</button>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="#overview" aria-label="DCORE home">
+      <span class="brand-mark">D</span><span>DCORE</span>
+    </a>
+    <div class="workspace-label">PERSONAL WORKSPACE</div>
+    <nav class="nav-list" aria-label="Main navigation">
+      <button class="nav-item active" data-view="overview"><span>⌂</span>Overview</button>
+      <button class="nav-item" data-view="profile"><span>◎</span>My profile</button>
+      <button class="nav-item" data-view="tools"><span>⌘</span>Developer tools</button>
+      <button class="nav-item" data-view="history"><span>◷</span>Activity history</button>
+      <button class="nav-item" data-view="favorites"><span>☆</span>Favorites</button>
+      <button class="nav-item" data-view="settings"><span>⚙</span>Settings</button>
     </nav>
+    <div class="sidebar-bottom">
+      <div class="sidebar-note"><span class="online-dot"></span><div><strong>DCORE workspace</strong><small>Your digital toolkit</small></div></div>
+      <a class="developer-link" href="https://devdivinity.netlify.app/" target="_blank" rel="noopener">Built by DevDivinity ↗</a>
+    </div>
   </aside>
 
-  <main>
-    <div class="top">
-      <div>
-        <div class="eyebrow">PERSONAL CONTROL CENTER</div>
-        <h1 id="greeting">Welcome to DCORE</h1>
-        <div class="muted" id="subtitle">Your tools. Your activity. Your workspace.</div>
+  <main class="main-panel">
+    <header class="topbar">
+      <div class="mobile-brand"><span class="brand-mark">D</span><strong>DCORE</strong></div>
+      <div class="breadcrumb"><span>Workspace</span><span class="crumb-sep">/</span><strong id="pageLabel">Overview</strong></div>
+      <div class="top-actions">
+        <span class="secure-label"><span class="online-dot"></span> Secure session</span>
+        <div class="avatar" id="avatar">D</div>
       </div>
-      <div class="avatar" id="avatar">👤</div>
+    </header>
+
+    <div class="page-content">
+      <section class="view-panel active-view" id="view-overview">
+        <div class="welcome-row">
+          <div><div class="eyebrow">YOUR DIGITAL WORKSPACE</div><h1 id="greeting">Welcome to DCORE<span class="accent-dot">.</span></h1><p class="muted" id="subtitle">Your tools, your activity, all in one place.</p></div>
+          <div class="date-chip"><span class="date-icon">◷</span><span id="todayLabel">Personal dashboard</span></div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-copy"><span class="hero-kicker">WELCOME BACK</span><h2 id="welcomeName">Hello there 👋</h2><p>Your digital toolkit is ready. Pick up where you left off or launch a tool below.</p><button class="primary-button" data-go="tools">Explore tools <span>↗</span></button></div>
+          <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="hero-monogram">D<span>.</span></div><span class="art-chip chip-one">BUILD</span><span class="art-chip chip-two">CREATE</span><span class="art-chip chip-three">SECURE</span></div>
+        </div>
+        <div class="section-heading"><div><div class="eyebrow">AT A GLANCE</div><h2>Workspace overview</h2></div><span class="muted small-copy">Live account data</span></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Account status</span><span class="stat-icon">◎</span></div><div class="stat-value" id="accountState">Checking…</div><div class="stat-foot"><span class="status-pip"></span>Registration status</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Tool activity</span><span class="stat-icon">⌘</span></div><div class="stat-value" id="historyCount">—</div><div class="stat-foot">Recent history records</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Favorites</span><span class="stat-icon">☆</span></div><div class="stat-value">—</div><div class="stat-foot">Favorites feature coming soon</div></article>
+        </div>
+        <section class="content-card" id="activityCard"><div class="card-heading"><div><div class="eyebrow">YOUR WORK</div><h2>Recent activity</h2></div><button class="text-button" data-go="history">View history <span>→</span></button></div><div id="activity"><div class="activity muted">Connecting to your DCORE account…</div></div><div class="status-line" id="status" role="status">Waiting for secure account verification.</div><p class="notice" id="notice"></p></section>
+        <section class="content-card quick-tools" id="quickTools"><div class="card-heading"><div><div class="eyebrow">GET THINGS DONE</div><h2>Quick tools</h2></div><button class="text-button" data-go="tools">All tools <span>→</span></button></div><div class="tool-grid">
+          <button class="tool-card" data-tool="calc"><span class="tool-symbol">＋</span><strong>Calculator</strong><small>Fast calculations</small><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-tool="password"><span class="tool-symbol">⌑</span><strong>Password generator</strong><small>Create secure passwords</small><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-tool="json"><span class="tool-symbol">{ }</span><strong>JSON formatter</strong><small>Format structured data</small><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-tool="qr"><span class="tool-symbol">▦</span><strong>QR generator</strong><small>Create QR codes</small><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-tool="url"><span class="tool-symbol">↗</span><strong>URL checker</strong><small>Check a web address</small><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-tool="hash"><span class="tool-symbol">#</span><strong>Hash generator</strong><small>Generate SHA-256 hashes</small><span class="tool-arrow">↗</span></button>
+        </div></section>
+      </section>
+
+      <section class="view-panel" id="view-profile">
+        <div class="eyebrow">YOUR ACCOUNT</div><h1>My profile<span class="accent-dot">.</span></h1><p class="muted page-intro">Your registered DCORE identity and account information.</p>
+        <div class="profile-card"><div class="profile-banner"></div><div class="profile-main"><div class="profile-avatar" id="profileAvatar">D</div><div class="profile-title"><h2 id="profileName">Telegram user</h2><p id="profileUsername" class="muted">@username</p></div><span class="account-badge" id="profileBadge">Verifying</span></div><div class="profile-fields"><div class="field"><label>First name</label><strong id="profileFirstName">Loading…</strong></div><div class="field"><label>Telegram username</label><strong id="profileUsernameField">—</strong></div><div class="field"><label>Preferred language</label><strong id="profileLanguage">—</strong></div><div class="field"><label>Account status</label><strong id="profileAccountStatus">Checking…</strong></div></div></div>
+      </section>
+
+      <section class="view-panel" id="view-tools">
+        <div class="eyebrow">BUILD SOMETHING</div><h1>Developer tools<span class="accent-dot">.</span></h1><p class="muted page-intro">Small utilities for everyday digital work.</p><div class="tool-grid tool-grid-page">
+          <button class="tool-card" data-tool="calc"><span class="tool-symbol">＋</span><strong>Calculator</strong><small>Fast calculations</small><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-tool="password"><span class="tool-symbol">⌑</span><strong>Password generator</strong><small>Create secure passwords</small><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-tool="json"><span class="tool-symbol">{ }</span><strong>JSON formatter</strong><small>Format structured data</small><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-tool="qr"><span class="tool-symbol">▦</span><strong>QR generator</strong><small>Create QR codes</small><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-tool="url"><span class="tool-symbol">↗</span><strong>URL checker</strong><small>Check a web address</small><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-tool="hash"><span class="tool-symbol">#</span><strong>Hash generator</strong><small>Generate SHA-256 hashes</small><span class="tool-arrow">↗</span></button>
+        </div><p class="muted small-copy tool-help">Choose a tool to continue in your DCORE bot.</p>
+      </section>
+
+      <section class="view-panel" id="view-history">
+        <div class="eyebrow">YOUR ACTIVITY</div><h1>Activity history<span class="accent-dot">.</span></h1><p class="muted page-intro">Your latest recorded tool activity from DCORE.</p><div class="content-card"><div class="card-heading"><div><h2>Recent records</h2><p class="muted small-copy">Showing up to 10 records</p></div><span class="stat-icon">◷</span></div><div id="historyActivity"><div class="activity muted">Loading history…</div></div></div>
+      </section>
+
+      <section class="view-panel" id="view-favorites">
+        <div class="eyebrow">YOUR SHORTCUTS</div><h1>Favorites<span class="accent-dot">.</span></h1><p class="muted page-intro">Keep the tools you use most close at hand.</p><div class="empty-state"><span class="empty-icon">☆</span><h2>Favorites are coming soon</h2><p class="muted">Saved tools will appear here when favorites storage is connected.</p></div>
+      </section>
+
+      <section class="view-panel" id="view-settings">
+        <div class="eyebrow">MAKE IT YOURS</div><h1>Settings<span class="accent-dot">.</span></h1><p class="muted page-intro">Review your current preferences.</p><div class="content-card settings-card"><div class="settings-row"><div><strong>Preferred language</strong><p class="muted small-copy">Your language saved to your DCORE account.</p></div><span class="settings-value" id="settingsLanguage">Loading…</span></div><div class="settings-row"><div><strong>Notifications</strong><p class="muted small-copy">Current notification preference from your account.</p></div><span class="settings-value" id="settingsNotifications">Loading…</span></div><div class="settings-row"><div><strong>Telegram session</strong><p class="muted small-copy">Private account data requires Telegram verification.</p></div><span class="account-badge">Protected</span></div><div class="settings-footnote">Preference editing will be enabled when the corresponding save API is connected.</div></div>
+      </section>
     </div>
-
-    <section class="welcome">
-      <div class="eyebrow">YOUR SPACE</div>
-      <h1 id="welcomeName">Hello there 👋</h1>
-      <p>Manage your tools and view your activity from one place.</p>
-    </section>
-
-    <section class="grid" aria-label="Account overview">
-      <div class="card"><div class="muted">Account</div><div class="stat" id="accountState">Loading</div><div class="muted">Registration status</div></div>
-      <div class="card"><div class="muted">Tool activity</div><div class="stat" id="historyCount">—</div><div class="muted">Recent records</div></div>
-      <div class="card"><div class="muted">Saved favorites</div><div class="stat" id="favoriteCount">—</div><div class="muted">Coming soon</div></div>
-    </section>
-
-    <section class="section" id="toolSection">
-      <h2>Quick tools</h2>
-      <div class="tools">
-        <button class="tool" data-tool="calc"><span class="emoji">🧮</span>Calculator<small>Quick calculations</small></button>
-        <button class="tool" data-tool="password"><span class="emoji">🔐</span>Password generator<small>Create a secure password</small></button>
-        <button class="tool" data-tool="json"><span class="emoji">{ }</span>JSON formatter<small>Format structured data</small></button>
-        <button class="tool" data-tool="qr"><span class="emoji">📱</span>QR generator<small>Create a QR code</small></button>
-        <button class="tool" data-tool="url"><span class="emoji">🔗</span>URL checker<small>Check a web address</small></button>
-        <button class="tool" data-tool="hash"><span class="emoji">#️⃣</span>Hash generator<small>Generate SHA-256</small></button>
-      </div>
-    </section>
-
-    <section class="section card">
-      <h2 id="sectionTitle">Recent activity</h2>
-      <div id="activity"><div class="activity muted">Connecting to your DCORE account…</div></div>
-      <div class="status" id="status" role="status">Waiting for secure account verification.</div>
-      <p class="notice" id="notice"></p>
-    </section>
+    <footer class="footer"><span>© DCORE · Your digital workspace</span><a href="https://devdivinity.netlify.app/" target="_blank" rel="noopener">DevDivinity ↗</a></footer>
   </main>
 </div>
-
+<nav class="mobile-nav" aria-label="Mobile navigation">
+  <button class="nav-item active" data-view="overview"><span>⌂</span><small>Home</small></button><button class="nav-item" data-view="tools"><span>⌘</span><small>Tools</small></button><button class="nav-item" data-view="history"><span>◷</span><small>History</small></button><button class="nav-item" data-view="profile"><span>◎</span><small>Profile</small></button><button class="nav-item" data-view="settings"><span>⚙</span><small>Settings</small></button>
+</nav>
 <script>
 (() => {
   const tg = window.Telegram && window.Telegram.WebApp;
-  if (tg) {
-    tg.ready();
-    tg.expand();
-  }
-
+  if (tg) { tg.ready(); tg.expand(); }
   const $ = id => document.getElementById(id);
-  const user = tg && tg.initDataUnsafe && tg.initDataUnsafe.user;
-  const displayName = user && (user.first_name || user.username) || "DCORE User";
-  $("greeting").textContent = "Welcome, " + displayName;
-  $("welcomeName").textContent = "Hello, " + displayName + " 👋";
-  $("avatar").textContent = displayName.charAt(0).toUpperCase() || "👤";
-
-  // Telegram's client-side user object is for display only.
-  // It must never be trusted for authorization or database access.
+  const telegramUser = tg && tg.initDataUnsafe && tg.initDataUnsafe.user;
+  let displayName = telegramUser && (telegramUser.first_name || telegramUser.username) || "DCORE User";
   const views = {
-    dashboard: ["Dashboard", "Your tools and recent activity."],
-    profile: ["My Profile", "Your registered account information."],
-    tools: ["Tools", "Your DCORE utilities."],
-    history: ["History", "Your recent tool activity."],
+    overview: ["Overview", "Your tools and recent activity."],
+    profile: ["My profile", "Your registered account information."],
+    tools: ["Developer tools", "Your DCORE utilities."],
+    history: ["Activity history", "Your recent tool activity."],
     favorites: ["Favorites", "Saved tools will appear here when implemented."],
-    settings: ["Settings", "Manage your account preferences."]
+    settings: ["Settings", "Your account preferences."]
   };
-
-  document.querySelectorAll("[data-view]").forEach(button => {
-    button.addEventListener("click", () => {
-      document.querySelectorAll("[data-view]").forEach(b => b.classList.remove("active"));
-      button.classList.add("active");
-      const view = views[button.dataset.view];
-      $("sectionTitle").textContent = view[0];
-      $("status").textContent = view[1];
-      if (button.dataset.view === "tools") $("toolSection").scrollIntoView({behavior:"smooth"});
-      else if (button.dataset.view === "history") $("activity").scrollIntoView({behavior:"smooth"});
-      else window.scrollTo({top:0, behavior:"smooth"});
-    });
-  });
-
-  document.querySelectorAll("[data-tool]").forEach(button => {
-    button.addEventListener("click", () => {
-      const command = {
-        calc:"calc", password:"password", json:"json",
-        qr:"qr", url:"url", hash:"hash"
-      }[button.dataset.tool];
-      if (tg) {
+  const showView = name => {
+    if (!views[name]) return;
+    document.querySelectorAll(".view-panel").forEach(panel => panel.classList.toggle("active-view", panel.id === "view-" + name));
+    document.querySelectorAll("[data-view]").forEach(button => button.classList.toggle("active", button.dataset.view === name));
+    $("pageLabel").textContent = views[name][0];
+    if (tg && tg.HapticFeedback) tg.HapticFeedback.selectionChanged();
+    window.scrollTo({top: 0, behavior: "smooth"});
+  };
+  document.querySelectorAll("[data-view]").forEach(button => button.addEventListener("click", () => showView(button.dataset.view)));
+  document.querySelectorAll("[data-go]").forEach(button => button.addEventListener("click", () => showView(button.dataset.go)));
+  document.querySelectorAll("[data-tool]").forEach(button => button.addEventListener("click", () => {
+    const command = {calc:"calc", password:"password", json:"json", qr:"qr", url:"url", hash:"hash"}[button.dataset.tool];
+    if (tg && typeof tg.sendData === "function") {
+      try {
         tg.sendData(JSON.stringify({action:"open_tool", tool:command}));
-        $("status").textContent = "Request sent to DCORE. If nothing happens, use the bot's command menu.";
-      } else {
-        $("status").textContent = "Open this dashboard through your DCORE Telegram bot to launch tools.";
+        $("status").textContent = "Tool request sent. If the bot does not respond, use /" + command + " in the chat.";
+      } catch (_) { $("status").textContent = "Use /" + command + " in the DCORE chat to launch this tool."; }
+    } else {
+      $("status").textContent = "Open DCORE in Telegram, then use /" + command + " in the chat.";
+    }
+    if (tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred("light");
+  }));
+  const renderHistory = history => {
+    const targets = [$("activity"), $("historyActivity")].filter(Boolean);
+    targets.forEach(target => {
+      target.replaceChildren();
+      if (!history.length) {
+        const empty = document.createElement("div");
+        empty.className = "activity muted";
+        empty.textContent = "No tool activity yet. Try one of the tools in DCORE.";
+        target.append(empty);
+        return;
       }
+      history.forEach(item => {
+        const row = document.createElement("div"); row.className = "activity";
+        const marker = document.createElement("span"); marker.className = "activity-marker"; marker.textContent = "↗";
+        const details = document.createElement("div"); details.className = "activity-details";
+        const name = document.createElement("strong"); name.textContent = item.tool_name || "Tool";
+        const time = document.createElement("div"); time.className = "muted activity-time";
+        time.textContent = item.created_at ? new Date(item.created_at).toLocaleString() : "";
+        details.append(name, time); row.append(marker, details); target.append(row);
+      });
     });
-  });
-
+  };
   async function loadAccount() {
     if (!tg || !tg.initData) {
       $("accountState").textContent = "Preview";
       $("historyCount").textContent = "—";
-      $("activity").innerHTML = '<div class="activity muted">Open this page from the DCORE Telegram Mini App to load your account.</div>';
+      $("activity").textContent = "Open this page through the DCORE Telegram Mini App to load private account data.";
+      $("historyActivity").textContent = "Telegram verification is required to load history.";
       $("status").textContent = "Telegram verification is required to load private account data.";
       return;
     }
-
     try {
-      const response = await fetch("/api/me", {
-        method: "GET",
-        headers: { "Authorization": "tma " + tg.initData }
-      });
-      if (!response.ok) throw new Error("Account verification failed (" + response.status + ")");
+      const response = await fetch("/api/me", {method:"GET", headers:{"Authorization":"tma " + tg.initData}});
       const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Account verification failed (" + response.status + ")");
+      if (!data.profile || !Array.isArray(data.history)) throw new Error("The dashboard API returned an unexpected response.");
+      const profile = data.profile;
+      const history = data.history;
+      displayName = profile.first_name || displayName;
+      $("greeting").textContent = "Welcome, " + displayName;
+      $("welcomeName").textContent = "Hello, " + displayName + " 👋";
+      $("avatar").textContent = displayName.charAt(0).toUpperCase() || "D";
+      $("profileAvatar").textContent = displayName.charAt(0).toUpperCase() || "D";
+      $("profileName").textContent = [profile.first_name, profile.username ? "@" + profile.username : ""].filter(Boolean).join(" ") || "Telegram user";
+      $("profileUsername").textContent = profile.username ? "@" + profile.username : "No username set";
+      $("profileFirstName").textContent = profile.first_name || "—";
+      $("profileUsernameField").textContent = profile.username ? "@" + profile.username : "Not set";
+      $("profileLanguage").textContent = profile.language || "English";
+      $("profileAccountStatus").textContent = "Registered";
+      $("profileBadge").textContent = "Verified";
       $("accountState").textContent = "Registered";
-      $("historyCount").textContent = String(data.history.length);
-      $("favoriteCount").textContent = "Soon";
-      $("welcomeName").textContent = "Hello, " + (data.profile.first_name || displayName) + " 👋";
-      $("activity").replaceChildren();
-
-      if (!data.history.length) {
-        const empty = document.createElement("div");
-        empty.className = "activity muted";
-        empty.textContent = "No tool activity yet. Try one of the tools above.";
-        $("activity").append(empty);
-      } else {
-        data.history.forEach(item => {
-          const row = document.createElement("div");
-          row.className = "activity";
-          const name = document.createElement("strong");
-          name.textContent = item.tool_name || "Tool";
-          const time = document.createElement("div");
-          time.className = "muted";
-          time.textContent = item.created_at || "";
-          row.append(name, time);
-          $("activity").append(row);
-        });
-      }
-      $("status").textContent = "Your account has been securely loaded.";
+      $("historyCount").textContent = String(history.length);
+      $("settingsLanguage").textContent = profile.language || "English";
+      const notifications = profile.notifications;
+      $("settingsNotifications").textContent = notifications === true ? "Enabled" : notifications === false ? "Disabled" : "Not set";
+      $("activityCard").classList.remove("hidden");
+      renderHistory(history);
+      $("status").textContent = "Your account and recent activity loaded securely.";
+      $("notice").textContent = "";
     } catch (error) {
       $("accountState").textContent = "Unavailable";
-      $("activity").replaceChildren();
-      $("status").textContent = "The secure backend is not connected yet.";
+      $("profileAccountStatus").textContent = "Unavailable";
+      $("profileBadge").textContent = "Unavailable";
+      $("activity").textContent = "Unable to load your account data.";
+      $("historyActivity").textContent = "Unable to load tool history.";
+      $("status").textContent = "The secure backend could not load your account.";
       $("notice").textContent = error.message;
     }
   }
+  $("todayLabel").textContent = new Date().toLocaleDateString(undefined, {weekday:"short", month:"short", day:"numeric"});
+  $("greeting").textContent = "Welcome, " + displayName;
+  $("welcomeName").textContent = "Hello, " + displayName + " 👋";
+  $("avatar").textContent = displayName.charAt(0).toUpperCase() || "D";
+  $("profileAvatar").textContent = displayName.charAt(0).toUpperCase() || "D";
   loadAccount();
 })();
 </script>
 </body>
+
 </html>
